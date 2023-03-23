@@ -1,2 +1,2 @@
-# ps-frontend-eduardo-bittencourt
-Created with CodeSandbox
+# fe-hiring-pairing-template
+
