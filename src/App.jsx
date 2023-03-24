@@ -1,11 +1,13 @@
-import Search from "./Search";
-import Instructions from "./components/InstructionsDisplay";
+import Instructions from './components/InstructionsDisplay'
+import Search from './Search'
 
-export default function App() {
+const App = () => {
   return (
     <>
       <Instructions />
       <Search />
     </>
-  );
+  )
 }
+
+export default App

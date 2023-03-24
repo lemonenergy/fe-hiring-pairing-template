@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Container = styled.div`
   cursor: pointer;
@@ -18,16 +18,20 @@ const Container = styled.div`
       border-color: #eee;
     }
   }
-`;
+`
 
 const Pagination = ({ current = 1, pages = 0, className }) => {
   return (
     <Container className={className}>
-      <button disabled={current <= 1}>{"<<"}</button>
+      <button type="button" disabled={current <= 1}>
+        {'<<'}
+      </button>
       {current}/{pages}
-      <button disabled={current >= pages}>{">>"}</button>
+      <button type="button" disabled={current >= pages}>
+        {'>>'}
+      </button>
     </Container>
-  );
-};
+  )
+}
 
-export default styled(Pagination)``;
+export default styled(Pagination)``

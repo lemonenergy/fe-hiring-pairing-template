@@ -1,6 +1,6 @@
-import { CharacterList } from "./components/Characters";
-import Pagination from "./components/Pagination";
-import SearchContainer from "./components/SearchContainer";
+import { CharacterList } from './components/Characters'
+import Pagination from './components/Pagination'
+import SearchContainer from './components/SearchContainer'
 
 const Search = () => {
   return (
@@ -12,7 +12,7 @@ const Search = () => {
       </CharacterList>
       <Pagination />
     </SearchContainer>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

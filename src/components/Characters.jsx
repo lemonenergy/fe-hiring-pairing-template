@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 const Card = styled.div(
   () => css`
@@ -14,18 +14,18 @@ const Card = styled.div(
     img {
       width: 80%;
     }
-  `
-);
+  `,
+)
 
 export const CharacterList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
   justify-content: center;
-`;
+`
 
 export const CharacterCard = ({ character }) => {
-  if (!character || !character.name) return null;
+  if (!character || !character.name) return null
 
   return (
     <Card>
@@ -37,5 +37,5 @@ export const CharacterCard = ({ character }) => {
         <p>Species: {character.species}</p>
       </div>
     </Card>
-  );
-};
+  )
+}

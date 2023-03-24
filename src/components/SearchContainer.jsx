@@ -1,6 +1,7 @@
-import styled from "styled-components";
-import Pagination from "./Pagination";
-import { CharacterList } from "./Characters";
+import styled from 'styled-components'
+
+import { CharacterList } from './Characters'
+import Pagination from './Pagination'
 
 const SearchContainer = styled.div`
   padding: 32px;
@@ -22,6 +23,6 @@ const SearchContainer = styled.div`
   ${CharacterList} {
     text-align: center;
   }
-`;
+`
 
-export default SearchContainer;
+export default SearchContainer

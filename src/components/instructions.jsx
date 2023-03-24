@@ -2,7 +2,7 @@ export const intro = (
   <>
     <p>
       Hoje nós vamos criar uma tela com funcionalidade de pesquisa, filtros e
-      paginação para a{" "}
+      paginação para a{' '}
       <a
         href="https://rickandmortyapi.com/documentation"
         target="_blank"
@@ -30,27 +30,27 @@ export const intro = (
     </ul>
 
     <p>
-      A API é acessada através da url base:{" "}
+      A API é acessada através da url base:{' '}
       <code>https://rickandmortyapi.com/api</code>
     </p>
     <p>
-      Durante nosso exercício só utilizaremos o endpoint{" "}
+      Durante nosso exercício só utilizaremos o endpoint{' '}
       <a
         href="https://rickandmortyapi.com/documentation/#character"
         target="_blank"
         rel="noreferrer"
       >
         /characters
-      </a>{" "}
+      </a>{' '}
       e seus filtros.
     </p>
     <p>
-      {" "}
-      Durante nosso exercício, você só precisará alterar os arquivos{" "}
-      <code>Search.js</code> e <code>components/Pagination</code>{" "}
+      {' '}
+      Durante nosso exercício, você só precisará alterar os arquivos{' '}
+      <code>Search.js</code> e <code>components/Pagination</code>{' '}
     </p>
   </>
-);
+)
 const showCharacters = (
   <>
     <span>
@@ -60,29 +60,32 @@ const showCharacters = (
     </span>
     <ul>
       <li>
-        Se a API retorna código 500, continue apresentando a mensagem "Nenhum
-        personagem encontrado" na tela e utilize <code>console.log</code> para
-        apresentar o erro
+        Se a API retorna código 500, continue apresentando a mensagem
+        &quot;Nenhum personagem encontrado&quot; na tela e utilize{' '}
+        <code>console.log</code> para apresentar o erro
       </li>
       <li>
         Utilize a propriedade <code>info</code> da resposta da API para
-        preencher a props <code>pages</code> do componente{" "}
-        <code>{"<Pagination />"}</code> com o número total de páginas da pesquisa.
+        preencher a props <code>pages</code> do componente{' '}
+        <code>{'<Pagination />'}</code> com o número total de páginas da
+        pesquisa.
       </li>
 
       <li>
-        Para cada personagem, utilize o componente{" "}
-        <code>{"<CharacterCard />"}</code> para apresentar seus dados.
-        <code>{"<CharacterCard />"}</code> recebe apenas uma props{" "}
+        Para cada personagem, utilize o componente{' '}
+        <code>{'<CharacterCard />'}</code> para apresentar seus dados.
+        <code>{'<CharacterCard />'}</code> recebe apenas uma props{' '}
         <code>character</code> que é o objeto representando um personagem
         retornado pela API.
         <pre>
-          {"<CharacterCard character={{ id: 1, name: 'Rick', gender: 'Male', status: 'alive' }}/>"}
+          {
+            "<CharacterCard character={{ id: 1, name: 'Rick', gender: 'Male', status: 'alive' }}/>"
+          }
         </pre>
       </li>
       <li>
-        Para apresentar múltiplos <code>{"<CharacterCard />"}</code>, utilize o
-        componente <code>{"<CharacterList />"}</code> da seguinte forma:
+        Para apresentar múltiplos <code>{'<CharacterCard />'}</code>, utilize o
+        componente <code>{'<CharacterList />'}</code> da seguinte forma:
         <pre>
           {`<CharacterList>`}
           <br />
@@ -98,26 +101,26 @@ const showCharacters = (
       </li>
     </ul>
   </>
-);
+)
 const searchByName = (
   <>
     <span>
-      Implemente a pesquisa por nome utilizando os{" "}
+      Implemente a pesquisa por nome utilizando os{' '}
       <a
         href="https://rickandmortyapi.com/documentation/#filter-characters"
         target="_blank"
         rel="noreferrer"
       >
         filtros
-      </a>{" "}
+      </a>{' '}
       da API. Cada vez que o input de pesquisa for alterado, avalie a
       necessidade e faça uma nova requisição HTTP para API filtrando os
       resultados pelo nome inputado, de acordo com as regras abaixo:
     </span>
     <ul>
       <li>
-        Se a API retornar qualquer status {'>'} 300, apresente a mensagem "Nenhum
-        personagem encontrado {':('}" e imprima o erro no console;
+        Se a API retornar qualquer status {'>'} 300, apresente a mensagem
+        &quot;Nenhum personagem encontrado :(&quot; e imprima o erro no console;
       </li>
       <li>
         Quando o campo de pesquisa estiver vazio ou quando o seu valor tiver 2
@@ -133,19 +136,19 @@ const searchByName = (
       </li>
     </ul>
   </>
-);
+)
 const paginationWithoutSearch = (
   <>
     <span>
-      Implemente a funcionalidade de paginação utilizando o filtro de{" "}
+      Implemente a funcionalidade de paginação utilizando o filtro de{' '}
       <a
         href="https://rickandmortyapi.com/documentation/#info-and-pagination"
         target="_blank"
         rel="noreferrer"
       >
         paginação
-      </a>{" "}
-      da API e o componente <code>{"<Pagination />"}</code>. Por enquanto,
+      </a>{' '}
+      da API e o componente <code>{'<Pagination />'}</code>. Por enquanto,
       desconsidere o campo de pesquisa.
     </span>
     <ul>
@@ -154,7 +157,7 @@ const paginationWithoutSearch = (
         erros da API
       </li>
       <li>
-        O componente <code>{"<Pagination />"}</code> não deve conter nenhuma
+        O componente <code>{'<Pagination />'}</code> não deve conter nenhuma
         lógica de negócio. Este é apenas um componente de visualização da
         interface de paginação e atualmente recebe as props:
         <ul>
@@ -166,14 +169,14 @@ const paginationWithoutSearch = (
           </li>
         </ul>
         <p>
-          Altere sua implementação para que o componente{" "}
-          <code>{"<Search />"}</code> possa fazer uma nova requisição à API
-          quando o usuário clicar nos botões "{"<<"}" e "{">>"}"
+          Altere sua implementação para que o componente{' '}
+          <code>{'<Search />'}</code> possa fazer uma nova requisição à API
+          quando o usuário clicar nos botões {'"<<"'} e {'">>"'}
         </p>
       </li>
     </ul>
   </>
-);
+)
 const paginationWithSearch = (
   <>
     <span>Integre o campo de pesquisa com a funcionalidade de paginação.</span>
@@ -189,31 +192,32 @@ const paginationWithSearch = (
     </ul>
     <p>
       Exemplo, se o campo estiver vazio e eu navegar até a página 10 e depois
-      escrever o termo "Morty" no campo de pesquisa, eu espero que seja
-      apresentado a primeira página dos resultados da pesquisa deste termo e que
-      eu possa navegar entre as páginas deste resultado através do componente{" "}
-      <code>{"<Pagination />"}</code>.
+      escrever o termo &quot;Morty&quot; no campo de pesquisa, eu espero que
+      seja apresentado a primeira página dos resultados da pesquisa deste termo
+      e que eu possa navegar entre as páginas deste resultado através do
+      componente <code>{'<Pagination />'}</code>.
     </p>
     <p>
       Se eu apagar o termo do input, quando o campo estiver preenchido com o
-      termo "Mo", eu espero que seja apresentada a 10 página de todos os
-      personagens
+      termo &quot;Mo&quot;, eu espero que seja apresentada a 10 página de todos
+      os personagens
     </p>
   </>
-);
+)
 const queryParams = (
   <>
     <span>
       Para qualquer alteração de página ou do campo de pesquisa, altere a URL
-      para apresentar o termo pesquisado e a página atual nos query params{" "}
+      para apresentar o termo pesquisado e a página atual nos query params{' '}
       <code>q</code> e <code>p</code>, respectivamente.
     </span>
     <p>
-      Ex: quando o usuário pesquisar a palavra "ric" e clicar até a página 2, a
-      URL deve apresentar o seguinte sufixo: <code>?q=ric&p=2</code>.
+      Ex: quando o usuário pesquisar a palavra &quot;ric&quot; e clicar até a
+      página 2, a URL deve apresentar o seguinte sufixo: <code>?q=ric&p=2</code>
+      .
     </p>
   </>
-);
+)
 const searchViaUrl = (
   <>
     <span>Habilite a pesquisa via URL</span>
@@ -228,12 +232,12 @@ const searchViaUrl = (
       </li>
     </ul>
   </>
-);
+)
 export const instructions = [
   showCharacters,
   searchByName,
   paginationWithoutSearch,
   paginationWithSearch,
   queryParams,
-  searchViaUrl
-];
+  searchViaUrl,
+]
