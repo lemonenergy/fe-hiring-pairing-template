@@ -143,7 +143,7 @@ const InstructionsDisplay = () => {
     <>
       <DisplayInstructionsButton htmlFor="instructions-checkbox">
         {'<'}
-        <input type="checkbox" id="instructions-checkbox" />
+        <input type="checkbox" id="instructions-checkbox" defaultChecked />
       </DisplayInstructionsButton>
       <Container>
         <CloseButton htmlFor="instructions-checkbox">x</CloseButton>
