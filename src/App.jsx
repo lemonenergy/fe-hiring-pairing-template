@@ -1,5 +1,5 @@
 import Search from "./Search";
-import Instructions from "./Instructions";
+import Instructions from "./components/InstructionsDisplay";
 
 export default function App() {
   return (

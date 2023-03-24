@@ -1,7 +1,4 @@
-import { useReducer, useState } from "react";
-import styled from "styled-components";
-
-const mainInstruction = (
+export const intro = (
   <>
     <p>
       Hoje nós vamos criar uma tela com funcionalidade de pesquisa, filtros e
@@ -80,9 +77,7 @@ const showCharacters = (
         <code>character</code> que é o objeto representando um personagem
         retornado pela API.
         <pre>
-          {
-            "<CharacterCard character={{ id: 1, name: 'Rick', gender: 'Male', status: 'alive' }}/>"
-          }
+          {"<CharacterCard character={{ id: 1, name: 'Rick', gender: 'Male', status: 'alive' }}/>"}
         </pre>
       </li>
       <li>
@@ -121,8 +116,8 @@ const searchByName = (
     </span>
     <ul>
       <li>
-        Se a API retornar qualquer status > 300, apresente a mensagem "Nenhum
-        personagem encontrado :(" e imprima o erro no console;
+        Se a API retornar qualquer status {'>'} 300, apresente a mensagem "Nenhum
+        personagem encontrado {':('}" e imprima o erro no console;
       </li>
       <li>
         Quando o campo de pesquisa estiver vazio ou quando o seu valor tiver 2
@@ -234,8 +229,7 @@ const searchViaUrl = (
     </ul>
   </>
 );
-
-const instructions = [
+export const instructions = [
   showCharacters,
   searchByName,
   paginationWithoutSearch,
@@ -243,147 +237,3 @@ const instructions = [
   queryParams,
   searchViaUrl
 ];
-
-const getCookie = () => {
-  const [match] = document.cookie.match(/completed=.*(;|$)/) || [];
-
-  if (!match) return 0;
-
-  const [, value] = match.split("=").map((str) => str.trim().replace(";", ""));
-  return Number(value);
-};
-const Container = styled.div`
-  box-sizing: border-box;
-  overflow: auto;
-  position: fixed;
-  // left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  max-width: 30%;
-  max-height: 100%;
-  padding: 16px 32px;
-  background-color: #fff;
-  box-shadow: 0 -5px 4px rgba(0, 0, 0, 0.2);
-
-  a {
-    color: #005230;
-  }
-
-  pre,
-  code {
-    overflow: auto;
-    color: #008059;
-    padding: 2px 4px;
-    border-radius: 4px;
-    background-color: #ededed;
-    letter-spacing: 0.02rem;
-  }
-
-  > hr {
-    margin: 32px 0;
-  }
-
-  > button {
-    border: 0;
-    background-color: transparent;
-    padding: 0;
-    font-size: 1.25rem;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-  }
-
-  > h3 {
-    text-align: center;
-  }
-
-  > ul {
-    list-style: none;
-  }
-
-  > ol,
-  > ul {
-    padding: 0 32px;
-
-    > li {
-      &:not(:last-child) {
-        margin-bottom: 16px;
-      }
-
-      > label {
-        > span {
-          font-size: 1rem;
-          cursor: pointer;
-        }
-
-        > ul {
-          margin-top: 8px;
-          > li {
-            margin-bottom: 8px;
-          }
-        }
-
-        > input {
-          margin-right: 4px;
-        }
-
-        > input:checked ~ * {
-          font-size: 0.5rem !important;
-        }
-      }
-    }
-  }
-`;
-
-const Instructions = () => {
-  const [isOpen, toggle] = useReducer((st) => !st, false);
-  const [completed, setCompleted] = useState(getCookie());
-
-  const handleCheck = (ev) => {
-    setCompleted((c) => {
-      const comp = ev.target.checked ? c + 1 : c - 1;
-      document.cookie = `completed=${comp}`;
-      return comp;
-    });
-  };
-
-  return (
-    <Container>
-      <button onClick={toggle}>Instruções</button>
-      {isOpen && (
-        <>
-          {mainInstruction}
-          <hr />
-          <h3>Exercícios:</h3>
-          <p>
-            Ao finalizar uma das tarefas, clique no check para aparecer a
-            próxima:
-          </p>
-          <ol>
-            {instructions.slice(0, completed + 1).map((i, index) => (
-              <li>
-                <label id={`instruction-${i}`}>
-                  <input
-                    onChange={handleCheck}
-                    type="checkbox"
-                    htmlFor={`instruction-${i}`}
-                    disabled={index < (completed - 1)}
-                    checked={index < completed}
-                  />
-                  {i}
-                </label>
-              </li>
-            ))}
-          </ol>
-          {instructions.length === completed && (
-            <h3>Parabéns, você completou todas as atividades!!!! 🎉🍋</h3>
-          )}
-        </>
-      )}
-    </Container>
-  );
-};
-
-export default Instructions;
