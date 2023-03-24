@@ -69,9 +69,8 @@ const showCharacters = (
       </li>
       <li>
         Utilize a propriedade <code>info</code> da resposta da API para
-        preencher a props <code>total</code> do componente{" "}
-        <code>{"<Pagination />"}</code> com o número total de personagens para
-        essa pesquisa.
+        preencher a props <code>pages</code> do componente{" "}
+        <code>{"<Pagination />"}</code> com o número total de páginas da pesquisa.
       </li>
 
       <li>
@@ -168,7 +167,7 @@ const paginationWithoutSearch = (
             <code>current</code> - página atual;
           </li>
           <li>
-            <code>total</code> - total de páginas;
+            <code>pages</code> - total de páginas;
           </li>
         </ul>
         <p>
@@ -211,12 +210,12 @@ const queryParams = (
   <>
     <span>
       Para qualquer alteração de página ou do campo de pesquisa, altere a URL
-      para apresentar a o termo pesquisado e a página atual nos query params{" "}
-      <code>s</code> e <code>p</code>, respectivamente.
+      para apresentar o termo pesquisado e a página atual nos query params{" "}
+      <code>q</code> e <code>p</code>, respectivamente.
     </span>
     <p>
       Ex: quando o usuário pesquisar a palavra "ric" e clicar até a página 2, a
-      URL deve apresentar o seguinte sufixo: <code>?s=ric&p=2</code>.
+      URL deve apresentar o seguinte sufixo: <code>?q=ric&p=2</code>.
     </p>
   </>
 );
@@ -224,7 +223,7 @@ const searchViaUrl = (
   <>
     <span>Habilite a pesquisa via URL</span>
     <p>
-      Ao entrar na página com os query params <code>p</code> e/ou <code>s</code>
+      Ao entrar na página com os query params <code>q</code> e/ou <code>p</code>
       , apresentar os resultados referentes.
     </p>
     <ul>
@@ -257,9 +256,11 @@ const Container = styled.div`
   box-sizing: border-box;
   overflow: auto;
   position: fixed;
-  left: 0;
+  // left: 0;
   right: 0;
   bottom: 0;
+  top: 0;
+  max-width: 30%;
   max-height: 100%;
   padding: 16px 32px;
   background-color: #fff;
@@ -368,7 +369,7 @@ const Instructions = () => {
                     onChange={handleCheck}
                     type="checkbox"
                     htmlFor={`instruction-${i}`}
-                    disabled={index < completed - 1}
+                    disabled={index < (completed - 1)}
                     checked={index < completed}
                   />
                   {i}

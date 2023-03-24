@@ -20,12 +20,12 @@ const Container = styled.div`
   }
 `;
 
-const Pagination = ({ current = 1, total = 0, className }) => {
+const Pagination = ({ current = 1, pages = 0, className }) => {
   return (
     <Container className={className}>
       <button disabled={current <= 1}>{"<<"}</button>
-      {current}/{total}
-      <button disabled={current >= total}>{">>"}</button>
+      {current}/{pages}
+      <button disabled={current >= pages}>{">>"}</button>
     </Container>
   );
 };
