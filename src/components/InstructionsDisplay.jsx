@@ -158,7 +158,7 @@ const InstructionsDisplay = () => {
           </p>
           <ol>
             {instructions.slice(0, completed + 1).map((instruction, index) => (
-              <li>
+              <li key={`instruction-${index + 1}`}>
                 <label htmlFor={`instruction-${index}`}>
                   <input
                     onChange={handleCheck}

@@ -30,7 +30,7 @@ export const intro = (
     </ul>
 
     <p>
-      A API é acessada através da url base:{' '}
+      Utilize a API REST do Rick and Morty, ela é acessada através da url base:{' '}
       <code>https://rickandmortyapi.com/api</code>
     </p>
     <p>
@@ -40,9 +40,10 @@ export const intro = (
         target="_blank"
         rel="noreferrer"
       >
-        /characters
+        /character
       </a>{' '}
-      e seus filtros.
+      e seus filtros. Não utilize a SDK da API, queremos ver como você lida com
+      requisições HTTP.
     </p>
     <p>
       {' '}

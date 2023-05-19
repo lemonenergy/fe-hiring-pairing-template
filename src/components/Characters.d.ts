@@ -1,7 +1,7 @@
 import React from "react";
 
 export const CharacterCard: React.FC<{
-  charcater: {
+  characater: {
     id: string;
     name: string;
     image: string;
