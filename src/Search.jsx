@@ -8,17 +8,16 @@ const Search = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
 
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
         setLoading(true)
         
-        // Construir URL baseada no termo de pesquisa
-        let url = 'https://rickandmortyapi.com/api/character'
-        if (searchTerm.length > 2) {
-          url += `?name=${encodeURIComponent(searchTerm)}`
-        }
+        // Construir URL baseada na página atual (desconsidera searchTerm conforme solicitado)
+        const url = `https://rickandmortyapi.com/api/character?page=${currentPage}`
         
         const response = await fetch(url)
         
@@ -30,7 +29,7 @@ const Search = () => {
         // Verificar outros tipos de erro
         if (!response.ok) {
           if (response.status === 404) {
-            throw new Error(`Nenhum personagem encontrado com esse nome`)
+            throw new Error(`Nenhum personagem encontrado`)
           } else {
             throw new Error(`Erro na requisição: ${response.status}`)
           }
@@ -38,6 +37,7 @@ const Search = () => {
         
         const data = await response.json()
         setCharacters(data.results)
+        setTotalPages(data.info.pages)
         setError(null)
       } catch (err) {
         setError(err.message)
@@ -48,10 +48,14 @@ const Search = () => {
     }
 
     fetchCharacters()
-  }, [searchTerm])
+  }, [currentPage])
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value)
+  }
+  
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage)
   }
 
   return (
@@ -77,7 +81,11 @@ const Search = () => {
         )}
       </CharacterList>
       
-      <Pagination />
+      <Pagination 
+        current={currentPage} 
+        pages={totalPages} 
+        onPageChange={handlePageChange}
+      />
     </SearchContainer>
   )
 }
