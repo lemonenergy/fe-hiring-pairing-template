@@ -7,20 +7,33 @@ const Search = () => {
   const [characters, setCharacters] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
         setLoading(true)
-        const response = await fetch('https://rickandmortyapi.com/api/character')
+        
+        // Construir URL baseada no termo de pesquisa
+        let url = 'https://rickandmortyapi.com/api/character'
+        if (searchTerm.length > 2) {
+          url += `?name=${encodeURIComponent(searchTerm)}`
+        }
+        
+        const response = await fetch(url)
         
         // Verificar se o status é maior que 500
         if (response.status >= 500) {
           throw new Error(`Erro no servidor: ${response.status}`)
         }
         
+        // Verificar outros tipos de erro
         if (!response.ok) {
-          throw new Error(`Erro na requisição: ${response.status}`)
+          if (response.status === 404) {
+            throw new Error(`Nenhum personagem encontrado com esse nome`)
+          } else {
+            throw new Error(`Erro na requisição: ${response.status}`)
+          }
         }
         
         const data = await response.json()
@@ -35,12 +48,20 @@ const Search = () => {
     }
 
     fetchCharacters()
-  }, [])
+  }, [searchTerm])
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value)
+  }
 
   return (
     <SearchContainer>
       <h1>Rick and Morty</h1>
-      <input placeholder="Pesquisa por nome" />
+      <input 
+        placeholder="Pesquisa por nome" 
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
       
       {error && <p style={{ color: 'red' }}>{error}</p>}
       
