@@ -20,14 +20,34 @@ const Container = styled.div`
   }
 `
 
-const Pagination = ({ current = 1, pages = 0, className }) => {
+const Pagination = ({ current = 1, pages = 0, className, onPageChange }) => {
+  const handlePrevious = () => {
+    if (current > 1) {
+      onPageChange(current - 1)
+    }
+  }
+
+  const handleNext = () => {
+    if (current < pages) {
+      onPageChange(current + 1)
+    }
+  }
+
   return (
     <Container className={className}>
-      <button type="button" disabled={current <= 1}>
+      <button 
+        type="button" 
+        disabled={current <= 1}
+        onClick={handlePrevious}
+      >
         {'<<'}
       </button>
       {current}/{pages}
-      <button type="button" disabled={current >= pages}>
+      <button 
+        type="button" 
+        disabled={current >= pages}
+        onClick={handleNext}
+      >
         {'>>'}
       </button>
     </Container>
