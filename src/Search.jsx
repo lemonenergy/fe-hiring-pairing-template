@@ -4,8 +4,8 @@ import Pagination from './components/Pagination'
 import SearchContainer from './components/SearchContainer'
 
 const Search = () => {
-  // Obter parâmetros iniciais da URL
-  const getInitialParams = () => {
+  // Obter parâmetros da URL (tanto inicial quanto durante navegação)
+  const getUrlParams = () => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search)
       return {
@@ -16,7 +16,7 @@ const Search = () => {
     return { page: 1, search: '' }
   }
   
-  const initialParams = getInitialParams()
+  const initialParams = getUrlParams()
   
   const [characters, setCharacters] = useState([])
   const [loading, setLoading] = useState(true)
@@ -46,6 +46,20 @@ const Search = () => {
       window.history.pushState({}, '', newUrl)
     }
   }, [currentPage, searchTerm])
+
+  // Manipular eventos de navegação (botão voltar/avançar do navegador)
+  useEffect(() => {
+    const handlePopState = () => {
+      const newParams = getUrlParams()
+      setCurrentPage(newParams.page)
+      setSearchTerm(newParams.search)
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => {
+      window.removeEventListener('popstate', handlePopState)
+    }
+  }, [])
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -110,7 +124,7 @@ const Search = () => {
     if (searchTerm.length > 2 && value.length <= 2) {
       setCurrentPage(lastSearchPage)
     } else if (value.length > 2 && searchTerm !== value) {
-      // Reset para primeira página quando faz uma nova pesquisa
+      // Reset para primeira página quando faz uma nova pesquisa (exceto no carregamento inicial)
       setCurrentPage(1)
     }
     
