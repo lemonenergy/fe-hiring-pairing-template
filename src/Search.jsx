@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CharacterList, CharacterCard } from './components/Characters'
 import Pagination from './components/Pagination'
 import SearchContainer from './components/SearchContainer'
@@ -10,14 +10,26 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
+  const [lastSearchPage, setLastSearchPage] = useState(1)
 
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
         setLoading(true)
         
-        // Construir URL baseada na página atual (desconsidera searchTerm conforme solicitado)
-        const url = `https://rickandmortyapi.com/api/character?page=${currentPage}`
+        // Construir URL baseada no termo de pesquisa e página atual
+        let url = 'https://rickandmortyapi.com/api/character'
+        const params = new URLSearchParams()
+        
+        // Adicionar página atual aos parâmetros
+        params.append('page', currentPage)
+        
+        // Adicionar filtro de nome se tiver mais de 2 caracteres
+        if (searchTerm.length > 2) {
+          params.append('name', searchTerm)
+        }
+        
+        url += `?${params.toString()}`
         
         const response = await fetch(url)
         
@@ -29,7 +41,7 @@ const Search = () => {
         // Verificar outros tipos de erro
         if (!response.ok) {
           if (response.status === 404) {
-            throw new Error(`Nenhum personagem encontrado`)
+            throw new Error(`Nenhum personagem encontrado com esse nome`)
           } else {
             throw new Error(`Erro na requisição: ${response.status}`)
           }
@@ -42,16 +54,32 @@ const Search = () => {
       } catch (err) {
         setError(err.message)
         setCharacters([])
+        setTotalPages(0)
       } finally {
         setLoading(false)
       }
     }
 
     fetchCharacters()
-  }, [currentPage])
+  }, [currentPage, searchTerm])
 
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value)
+    const value = e.target.value
+    
+    // Se começar a digitar, salva a página atual para poder voltar a ela
+    if (searchTerm.length <= 2 && value.length > 2) {
+      setLastSearchPage(currentPage)
+    }
+    
+    // Se apagar tudo, volta para a página que estava antes da pesquisa
+    if (searchTerm.length > 2 && value.length <= 2) {
+      setCurrentPage(lastSearchPage)
+    } else if (value.length > 2) {
+      // Reset para primeira página quando faz uma nova pesquisa
+      setCurrentPage(1)
+    }
+    
+    setSearchTerm(value)
   }
   
   const handlePageChange = (newPage) => {
